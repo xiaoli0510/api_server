@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const userRouter = require("./router/user.js");
+const userinfoRouter = require("./router/userinfo.js");
 const joi = require("joi");
 //解析token
 const expressJWT = require("express-jwt");
@@ -26,6 +27,7 @@ app.use(
   expressJWT({ secret: config.jwtSecretKey }).unless({ path: [/^\/api/] })
 );
 app.use("/api", userRouter);
+app.use("/my", userinfoRouter);
 
 app.post('/ab',(req, res) => {
   res.send({
