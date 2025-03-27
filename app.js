@@ -24,7 +24,9 @@ app.use((req, res, next) => {
 
 //注册解析token的中间件，去除api请求中以/api/开头的路径请求
 app.use(
-  expressJWT({ secret: config.jwtSecretKey }).unless({ path: [/^\/api/] })
+  expressJWT({
+    secret: config.jwtSecretKey, // 确保密钥与生成 token 时一致
+  }).unless({ path: [/^\/api/] })
 );
 app.use("/api", userRouter);
 app.use("/my", userinfoRouter);
@@ -32,7 +34,7 @@ app.use("/my", userinfoRouter);
 app.post('/ab',(req, res) => {
   res.send({
       status: 0,
-      msg: 'ok1111'
+      msg: 'ok'
   })
 })
 

@@ -1,8 +1,9 @@
-const express = require('express')
-const userinfo_handle = require('../router_handler/userinfo')
+const express = require('express');
+const userinfo_handle = require('../router_handler/userinfo');
 
-const router = express()
+const router = express.Router(); // 修复：使用 express.Router()
 
-router.get('/userinfo',userinfo_handle.getUserInfo)
+// 绑定处理函数
+router.get('/userinfo', userinfo_handle.getUserInfo); // 修复：调用正确的处理函数
 
-module.exports = router
+module.exports = router;

@@ -30,16 +30,15 @@ exports.login = (req, res) => {
   const userinfo = req.body;
   const str = `select id,username,password from ev_users where username = ?`;
   db.query(str, userinfo.username, (err, results) => {
-    if (err) return res.cc("未知错误");
+    if (err) return res.cc(err.message);
     if (results.length !== 1) return res.cc("用户名不存在");
     if (!bcrypt.compareSync(userinfo.password, results[0].password))
       return res.cc("密码错误");
+    console.log({ id: results[0].id })
     const token = jwt.sign(
-      {
-        id: results[0].id,
-      },
-      config.expiresIn,
-      { expiresIn: config.expiresIn }
+      { id: results[0].id }, // 将用户 id 放入 token 的 payload
+      config.jwtSecretKey, // 确保密钥与解析时一致
+      { expiresIn: config.expiresIn } // 设置 token 过期时间
     );
     res.send({
       status: 0,
