@@ -2,7 +2,7 @@ const express = require('express');
 const userinfo_handler = require('../router_handler/userinfo');
 
 const router = express.Router(); // 修复：使用 express.Router()
-const {update_userinfo_schema,update_pwd_schema} = require('../schema/user');
+const {update_userinfo_schema,update_pwd_schema, updata_avatar_schema} = require('../schema/user');
 const expressJoi = require('@escook/express-joi');
 
 // 获取用户信息
@@ -13,6 +13,9 @@ router.post('/userinfo',expressJoi(update_userinfo_schema), userinfo_handler.upd
 
 //更新用户密码
 router.post('/updatepwd', expressJoi(update_pwd_schema), userinfo_handler.updatePassword)
+
+//更新用户头像
+router.post('/update/avatar', expressJoi(updata_avatar_schema),userinfo_handler.updateAvatar)
 
 
 
