@@ -3,6 +3,7 @@ const cors = require("cors");
 const userRouter = require("./router/user.js");
 const userinfoRouter = require("./router/userinfo.js");
 const artcateRouter = require('./router/artcate.js')
+const articleRouter = require('./router/article.js')
 const joi = require("joi");
 //解析token
 const expressJWT = require("express-jwt");
@@ -32,6 +33,7 @@ app.use(
 app.use("/api", userRouter);
 app.use("/my", userinfoRouter);
 app.use("/my/article", artcateRouter);
+app.use("/my/essay", articleRouter);
 
 app.post('/ab',(req, res) => {
   res.send({
